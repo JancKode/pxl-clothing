@@ -44,17 +44,13 @@ class Directory extends Component {
     };
   }
   render() {
-    const {sections} = this.state;
+    const { sections } = this.state;
 
-    let sectionItem = sections.map(({title, imageUrl, id, size}) => {
-        return <MenuItem key={id} imageUrl={imageUrl}  title={title.toUpperCase()} subtitle='Shop now' size={size} />
-    })
-    
-    return (
-      <div className="directory-menu">
-        {sectionItem}
-      </div>
-    );
+    let sectionItem = sections.map(({ id, ...otherSectionProps }) => {
+      return <MenuItem key={id} subtitle="Shop now" {...otherSectionProps} />;
+    });
+
+    return <div className="directory-menu">{sectionItem}</div>;
   }
 }
 
