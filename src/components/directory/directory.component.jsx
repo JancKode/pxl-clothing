@@ -45,7 +45,6 @@ class Directory extends Component {
   }
   render() {
     const { sections } = this.state;
-
     let sectionItem = sections.map(({ id, ...otherSectionProps }) => {
       return <MenuItem key={id} subtitle="Shop now" {...otherSectionProps} />;
     });
