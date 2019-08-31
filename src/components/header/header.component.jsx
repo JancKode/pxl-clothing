@@ -5,9 +5,12 @@ import { ReactComponent as Logo } from "../../assets/crown.svg";
 
 import {auth} from '../../firebase/firebase.utils'
 
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
+
 import "./header.styles.scss";
 
-const Header = ({currentUser}) => {
+const Header = ({currentUser, hidden}) => {
 
 const onClickHandler=()=>{
   auth.signOut()
@@ -29,12 +32,16 @@ const onClickHandler=()=>{
         <div className='option' onClick={onClickHandler}>SIGN OUT</div> :
         <Link className='option' to='/signin'>SIGN IN</Link>
       }
+      <CartIcon />
     </div>
+     {hidden ? null : <CartDropdown />}
   </div>)
 };
 
-const mapStateToProps =(state) => ({
-  currentUser: state.user.currentUser
+const mapStateToProps = ({user: {currentUser}, cart: {hidden}}) => ({
+  // currentUser: state.user.currentUser
+  currentUser,
+  hidden
 })
 
 export default connect(mapStateToProps)(Header);
